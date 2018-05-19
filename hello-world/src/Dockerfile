@@ -1,6 +1,6 @@
 FROM node:10.1.0-alpine
 EXPOSE 3000
-ENV GREETING='Hello World!'
+ENV GREETING='Hello Worlds!'
 WORKDIR /app
 
 COPY package.json .
