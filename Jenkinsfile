@@ -38,7 +38,7 @@ podTemplate(label: 'test', cloud: 'kubernetes',
             }},
             'integrationTests': {stage('integration tests'){
                 container('kubectl'){
-                    sh "kubectl run -i -t --env=\"BASE_URL=http://cicd-demo-service:3000\" cicd-demo-integration-tests-${GIT_COMMIT} --image=${TESTS_DOCKER_TAG} --restart=\"Never\""
+                    sh "kubectl run -i --env=\"BASE_URL=http://cicd-demo-service:3000\" cicd-demo-integration-tests-${GIT_COMMIT} --image=${TESTS_DOCKER_TAG} --restart=\"Never\""
                 }
             }}
           )
