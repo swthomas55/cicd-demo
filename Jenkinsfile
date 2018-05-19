@@ -11,12 +11,14 @@ podTemplate(label: 'test', cloud: 'kubernetes',
       GIT_BRANCH = source_code.GIT_BRANCH.replaceAll('origin/', '').toLowerCase()
       VERSION_IDENTIFIER = "${GIT_BRANCH}-${GIT_COMMIT}"
       APP_DOCKER_TAG = "cicd-demo:${VERSION_IDENTIFIER}"
+      APP_DOCKER_LATEST = "cicd-demo:latest"
       TESTS_DOCKER_TAG = "cicd-demo-tests:${VERSION_IDENTIFIER}"
       try{
           container('docker'){
             parallel(
               'buildApp': {stage('build app'){
                 sh "docker build -f ./hello-world/src/Dockerfile -t ${APP_DOCKER_TAG}  ./hello-world/src"
+                sh "docker build -f ./hello-world/src/Dockerfile -t ${APP_DOCKER_LATEST}  ./hello-world/src"
               }},
               'buildTests': {stage('build tests'){
                 sh "docker build -f ./hello-world/integration/Dockerfile -t ${TESTS_DOCKER_TAG} ./hello-world/integration"
